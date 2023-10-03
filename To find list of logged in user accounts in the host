@@ -1,0 +1,2 @@
+DeviceLogonEvents
+| where DeviceName contains "XXXXXXXXXX" and (LogonType contains "Interactive" or LogonType contains "Unlock") | distinct AccountName
