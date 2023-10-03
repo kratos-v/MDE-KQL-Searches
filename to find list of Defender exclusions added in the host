@@ -1,3 +1,4 @@
 DeviceRegistryEvents
+| where not(InitiatingProcessFolderPath has_any ("/")) //to exclude Linux events
 | where RegistryKey contains "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Exclusions\\Paths" and RegistryValueData != @"0" and DeviceName contains "XXXXXXXXXX"
 | where not( InitiatingProcessParentFileName == @"services.exe" and InitiatingProcessCommandLine has_any ("svchost.exe -k netsvcs -p", "svchost.exe -k netsvcs -p -s gpsvc") and ActionType == @"RegistryKeyCreated" and RegistryKey == @"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Exclusions\Paths" and RegistryValueName=="" and RegistryValueType == @"None")
